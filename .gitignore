@@ -1,0 +1,16 @@
+# Local credentials - never commit
+secrets.h
+
+# Arduino / VS Code build output and local editor config
+build/
+.vscode/
+*.bin
+*.uf2
+*.elf
+*.hex
+*.map
+
+# OS clutter
+.DS_Store
+Thumbs.db
+desktop.ini
