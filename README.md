@@ -62,7 +62,7 @@ Full details, the measured voltage-drop table and power notes are in
 1. **Clone** the repository. Keep the folder name `leds_300pebbleLights_rpico` – the Arduino IDE
    requires the sketch folder to match the `.ino` file name.
    ```bash
-   git clone https://github.com/<your-user>/leds_300pebbleLights_rpico.git
+   git clone https://github.com/davidorser/leds_300pebbleLights_rpico.git
    ```
 2. **Create your credentials file**: copy `secrets.h.example` to `secrets.h` in the same folder and fill
    in your Wi‑Fi SSID/password and an OTA password. `secrets.h` is git-ignored.
