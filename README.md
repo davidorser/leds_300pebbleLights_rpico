@@ -48,7 +48,7 @@ Full details, the measured voltage-drop table and power notes are in
 
 ## Software requirements
 
-- [Arduino IDE 2.x](https://www.arduino.cc/en/software) (or `arduino-cli`)
+- [Arduino IDE 2.x](https://www.arduino.cc/en/software)
 - **Raspberry Pi Pico/RP2040/RP2350** board core by Earle Philhower
   ([arduino-pico](https://github.com/earlephilhower/arduino-pico)) – tested with 6.3.1
 - **Adafruit NeoPixel** library – tested with 1.15.5
@@ -86,23 +86,8 @@ Install steps for both are under [Getting started](#getting-started).
    click *Upload*.
 9. Open the Serial Monitor to see the assigned IP address and `UDP listening on port 5005`.
 
-Or from the command line (install the core and library once, then compile):
-
-```bash
-arduino-cli core install rp2040:rp2040 --additional-urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
-```
-
-```bash
-arduino-cli lib install "Adafruit NeoPixel"
-```
-
-```bash
-arduino-cli compile -b rp2040:rp2040:rpipicow .
-```
-
-```bash
-arduino-cli upload -b rp2040:rp2040:rpipicow -p <COM port> .
-```
+Prefer the command line? The same setup, build and upload steps using `arduino-cli` are in
+[docs/ARDUINO_CLI.md](docs/ARDUINO_CLI.md).
 
 ### Over-the-air (OTA) updates
 
@@ -155,7 +140,8 @@ leds_300pebbleLights_rpico/
 ├── secrets.h                        # your copy (git-ignored, not in the repo)
 ├── docs/
 │   ├── HARDWARE.md                  # wiring, power, voltage-drop measurements
-│   └── ANIMATION.md                 # how the red/green waves and sparkle work
+│   ├── ANIMATION.md                 # how the red/green waves and sparkle work
+│   └── ARDUINO_CLI.md               # building and uploading with arduino-cli
 └── README.md
 ```
 
