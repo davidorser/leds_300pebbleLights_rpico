@@ -50,10 +50,10 @@ Full details, the measured voltage-drop table and power notes are in
 
 - [Arduino IDE 2.x](https://www.arduino.cc/en/software) (or `arduino-cli`)
 - **Raspberry Pi Pico/RP2040/RP2350** board core by Earle Philhower
-  ([arduino-pico](https://github.com/earlephilhower/arduino-pico)) – tested with 6.3.1.
-  Add this URL under *File → Preferences → Additional boards manager URLs*:
-  `https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json`
-- **Adafruit NeoPixel** library – tested with 1.15.5 (install from the Library Manager)
+  ([arduino-pico](https://github.com/earlephilhower/arduino-pico)) – tested with 6.3.1
+- **Adafruit NeoPixel** library – tested with 1.15.5
+
+Install steps for both are under [Getting started](#getting-started).
 
 `WiFi`, `WiFiUdp`, `SimpleMDNS` and `ArduinoOTA` are bundled with the arduino-pico core.
 
@@ -64,15 +64,37 @@ Full details, the measured voltage-drop table and power notes are in
    ```bash
    git clone https://github.com/davidorser/leds_300pebbleLights_rpico.git
    ```
-2. **Create your credentials file**: copy `secrets.h.example` to `secrets.h` in the same folder and fill
+2. **Add the Philhower board package URL**: in the Arduino IDE open **File → Preferences** (on macOS,
+   **Arduino IDE → Settings**). In **Additional boards manager URLs** add the URL below, then click **OK**.
+   If the field already has URLs, put this one on its own line (click the icon beside the field to open
+   the list editor).
+   ```
+   https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+   ```
+3. **Install the Pico board core**: open **Tools → Board → Boards Manager…**, search for `pico`, find
+   **Raspberry Pi Pico/RP2040/RP2350** *by Earle F. Philhower, III*, and click **Install**. This core
+   includes the `WiFi`, `WiFiUdp`, `SimpleMDNS` and `ArduinoOTA` libraries the sketch uses.
+   > Don't confuse it with **Arduino Mbed OS RP2040 Boards** by Arduino, which has no Pico W Wi‑Fi support
+   > and won't compile this sketch.
+4. **Install the Adafruit NeoPixel library**: open **Tools → Manage Libraries…**, search for
+   `Adafruit NeoPixel`, and click **Install**.
+5. **Create your credentials file**: copy `secrets.h.example` to `secrets.h` in the same folder and fill
    in your Wi‑Fi SSID/password and an OTA password. `secrets.h` is git-ignored.
-3. **Open** `leds_300pebbleLights_rpico.ino` in the Arduino IDE.
-4. Select **Tools → Board → Raspberry Pi Pico/RP2040/RP2350 → Raspberry Pi Pico W**.
-5. **First upload over USB**: hold BOOTSEL while plugging in the Pico W (or select its COM port) and
+6. **Open** `leds_300pebbleLights_rpico.ino` in the Arduino IDE.
+7. Select **Tools → Board → Raspberry Pi Pico/RP2040/RP2350 → Raspberry Pi Pico W**.
+8. **First upload over USB**: hold BOOTSEL while plugging in the Pico W (or select its COM port) and
    click *Upload*.
-6. Open the Serial Monitor to see the assigned IP address and `UDP listening on port 5005`.
+9. Open the Serial Monitor to see the assigned IP address and `UDP listening on port 5005`.
 
-Or from the command line:
+Or from the command line (install the core and library once, then compile):
+
+```bash
+arduino-cli core install rp2040:rp2040 --additional-urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+```
+
+```bash
+arduino-cli lib install "Adafruit NeoPixel"
+```
 
 ```bash
 arduino-cli compile -b rp2040:rp2040:rpipicow .
