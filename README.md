@@ -106,20 +106,8 @@ stored in `rxBuf` (default `"redgrn"`) but **does not yet change the pattern** �
 future mode selection. For now, that makes it a handy connection test.
 
 Use **`udp_send.exe`**, a small Windows command-line tool from the companion repository
-[leds_winC_UDP_CLIprog](https://github.com/davidorser/leds_winC_UDP_CLIprog). Its README covers
-installing the MinGW-w64 `g++` compiler and building it. In short:
-
-```bash
-git clone https://github.com/davidorser/leds_winC_UDP_CLIprog.git
-```
-
-```bash
-cd leds_winC_UDP_CLIprog
-```
-
-```bash
-g++ -std=c++17 -O2 -static udp_send.cpp -lws2_32 -o udp_send.exe
-```
+[leds_winC_UDP_CLIprog](https://github.com/davidorser/leds_winC_UDP_CLIprog). See that repository's
+README for how to build and set it up.
 
 **Find the Pico W's IP address.** `udp_send` needs the numeric IPv4 address, not a hostname. Look under
 **Tools → Port → Network ports** in the Arduino IDE (`djoOneStrandPico at 192.168.1.50`), check the Serial
