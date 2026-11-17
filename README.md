@@ -103,17 +103,45 @@ Your PC and the Pico W must be on the same subnet (mDNS is used for discovery).
 
 The sketch replies to any UDP packet on port 5005 with `OK: ` followed by the received text. The text is
 stored in `rxBuf` (default `"redgrn"`) but **does not yet change the pattern** – it's a placeholder for
-future mode selection.
+future mode selection. For now, that makes it a handy connection test.
 
-Python example:
+Use **`udp_send.exe`**, a small Windows command-line tool from the companion repository
+[leds_winC_UDP_CLIprog](https://github.com/davidorser/leds_winC_UDP_CLIprog). Its README covers
+installing the MinGW-w64 `g++` compiler and building it. In short:
 
-```python
-import socket
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.settimeout(2)
-s.sendto(b"hello", ("192.168.1.50", 5005))   # use the IP printed on the Serial Monitor
-print(s.recvfrom(1024)[0].decode())           # -> OK: hello
+```bash
+git clone https://github.com/davidorser/leds_winC_UDP_CLIprog.git
 ```
+
+```bash
+cd leds_winC_UDP_CLIprog
+```
+
+```bash
+g++ -std=c++17 -O2 -static udp_send.cpp -lws2_32 -o udp_send.exe
+```
+
+**Find the Pico W's IP address.** `udp_send` needs the numeric IPv4 address, not a hostname. Look under
+**Tools → Port → Network ports** in the Arduino IDE (`djoOneStrandPico at 192.168.1.50`), check the Serial
+Monitor at boot, or ping the OTA hostname:
+
+```bash
+ping -4 djoOneStrandPico.local
+```
+
+**Send a message** (IP, port, message). Quote the message if it contains spaces:
+
+```bash
+udp_send 192.168.1.50 5005 hello
+```
+
+```
+Sent 5 bytes to 192.168.1.50:5005
+Reply 9B from 192.168.1.50:5005  "OK: hello"
+```
+
+If you get `No reply (timeout)`, check that the PC and Pico W are on the same network and that Windows
+Firewall allows `udp_send.exe` on private networks (see the tool's README).
 
 ## Configuration
 
